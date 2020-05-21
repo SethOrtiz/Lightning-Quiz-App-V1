@@ -1,0 +1,7 @@
+<aura:event type="COMPONENT" description="Tiggered by user registering, submiting the Quiz, or Restarting">
+    <aura:attribute name="stage" type="String" required="true"/>
+    <aura:attribute name="quizId" type="String" required="false"/>
+    <aura:attribute name="attempt" type="String" required="false"/>
+    <!-- <aura:attribute name="results" type="Object" required="false"/> -->
+    <aura:attribute name="results" type="List" required="false"/>
+</aura:event>
