@@ -1,0 +1,29 @@
+<aura:component >
+    <aura:attribute name="questionLabel" type="String" default="example"/>
+    <aura:attribute name="value" type="String"/>
+    <aura:attribute name="questionId" type="String"/>
+    <aura:attribute name="options" type="List"/>    
+    <aura:attribute name="required" type="Boolean" default="false"/>
+    <aura:attribute name="index" type="Integer"/>
+    <aura:registerEvent name="as" type="c:AnswerSelected"/>
+    <lightning:layout>
+         <lightning:layoutItem>
+            <p class="index">
+                {!v.index + 1})  
+            </p>
+         </lightning:layoutItem>
+
+        <lightning:layoutItem>
+            <lightning:radioGroup name="{!v.questionId}"
+                                  label="{!v.questionLabel}"
+                                  options="{!v.options}"
+                                  value="{!v.value}"
+                                  type="radio"
+                                  onchange="{!c.handleChange}"
+                                  required="{!v.required}"
+                                  />
+        </lightning:layoutItem>
+    </lightning:layout>
+
+
+</aura:component>
