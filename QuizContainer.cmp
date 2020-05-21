@@ -1,0 +1,28 @@
+<aura:component controller="QuizController">
+    <aura:attribute name="registerOpen" type="boolean" default="true"/>
+    <aura:attribute name="quizOpen" type="boolean" default="false"/>
+    <aura:attribute name="resultsOpen" type="boolean" default="false"/>
+    <aura:attribute name="questions" type="List" default="[]"/>
+    <aura:attribute name="results" type="List" default="[]"/>
+    
+    
+    <aura:handler name="qsc" event="c:QuizStageChange" action="{!c.handleQuizStageChange}"/>
+    
+    <lightning:layout horizontalAlign="center">
+        <lightning:layoutItem size="6" mediumDeviceSize="6" padding="around-large" class="slds-m-top_medium" >
+            <aura:if isTrue="{!v.registerOpen}">
+                <lightning:card >
+                    <c:RegisterForm/>
+                </lightning:card>
+            </aura:if>
+            <aura:if isTrue="{!v.quizOpen}">
+                <div>
+                    <c:QuizForm questions="{!v.questions}" results="{!v.results}"/>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.resultsOpen}">           
+                <c:QuizResults results="{!v.results}"/>
+            </aura:if>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
