@@ -17,7 +17,9 @@
         if (event.getParam('status') === "FINISHED") {
             cmp.set("v.modalOpen", false);
             let qsc = cmp.getEvent("qsc");
-            qsc.setParams({"stage": "QUIZ", "quizId": "a056g00000JUgceAAD", "attempt" : "2"}); 
+            
+            //Needs upgrade to add a quiz Id dynamically.
+            qsc.setParams({"stage": "QUIZ", "quizId": "a056g00000JUgceAAD"}); 
             qsc.fire();
         }
     }
