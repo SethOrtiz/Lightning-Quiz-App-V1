@@ -1,0 +1,24 @@
+<aura:component >
+    <aura:attribute name="correctAnswer" type="String"/>
+    <aura:attribute name="actualAnswer" type="String"/>
+    <aura:attribute name="questionId" type="String"/>
+    <aura:attribute name="questionLabel" type="String"/>
+	<aura:attribute name="correct" type="Boolean"/> 
+    
+    <lightning:card class="slds-m-bottom_small">
+        <aura:if isTrue="{!v.correct}">
+            <div class="correct  answer-card">
+                <h2>{!v.questionLabel}</h2>
+                <p>Your Answer: {!v.actualAnswer}</p>
+                <p>Correct Answer: {!v.correctAnswer}</p>
+            </div>
+            <aura:set attribute="else">
+                <div class="incorrect  answer-card">
+                    <h2>{!v.questionLabel}</h2>
+                    <p>Your Answer: {!v.actualAnswer}</p>
+                    <p>Correct Answer: {!v.correctAnswer}</p>
+                </div>
+            </aura:set>
+        </aura:if> 
+    </lightning:card>
+</aura:component>
