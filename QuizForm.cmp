@@ -1,0 +1,60 @@
+<aura:component >
+    <!-- quiz logic attributes -->
+    <aura:attribute name="questions" type="List" default="[]"/>
+    <aura:attribute name="results" type="List" default="[]"/>
+    <aura:attribute name="nextEnabled" type="Boolean" default="false"/>
+    <aura:attribute name="submitEnabled" type="Boolean" default="false"/> 
+    <aura:attribute name="errorMessage" type="Boolean" default="false"/>
+    <aura:attribute name="questionsPerScreen" type="Integer" default="5"/>
+    
+    <aura:handler name="as" event="c:AnswerSelected" action="{!c.handleAnswerSelected}"/>
+    <aura:handler name="qpsc" event="c:QuestionsPerScreenChange" action="{!c.handleQuestionsPerScreenChange}"/>
+    
+    <aura:registerEvent name="qsc" type="c:QuizStageChange"/>
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem class="slds-text-heading_large">
+            <lightning:icon iconName="action:edit"/>
+            <span class="page-section page-header slds-m-left_small">Quiz</span>
+        </lightning:layoutItem>
+    </lightning:layout>
+        <lightning:layout class="slds-page-header">
+        <lightning:layoutItem >
+            <c:QuestionsPerScreen options="[
+                                         {'label': '5', 'value': '5'},
+                                         {'label': '10', 'value': '10'},
+                                         {'label': '15', 'value': '15'},
+                                         {'label': '20', 'value': '20'},                                                        
+                                         ]"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <lightning:card>
+        <lightning:layout >
+            <fieldset>           
+                <legend id="newquizform">
+                </legend> 
+                <form class="slds-form--stacked slds-p-horizontal_large slds-m-vertical_large">   
+                    <aura:iteration items="{!v.questions}" var="item"  indexVar="index">
+                        <aura:if isTrue="{!lessthan(index, v.questionsPerScreen)}">
+                             <c:Question index="{!index}" options="{!item.Options__c}" questionLabel="{!item.Body__c}" questionId="{!item.Id}" required="{!item.required}"/>
+                        </aura:if>
+                        <aura:if isTrue="{!index == v.questionsPerScreen}">
+                            <lightning:button aura:id="quizNextBtn" variant="Brand" class="slds-m-vertical_large" label="Next" title="Next" onclick="{!c.handleNext}"/>
+                        </aura:if>    
+                    </aura:iteration>                         
+                </form>
+                <div class="slds-m-left_large slds-border_top">
+                     <lightning:button aura:id="quizSubmitBtn" variant="Brand" class="slds-m-top_small" label="Submit" title="Submit" onclick="{!c.handleQuizSubmit}" /> 
+                </div>
+            </fieldset>
+        </lightning:layout>
+        
+        <aura:if isTrue="{!v.errorMessage}">
+            <div class="error-message slds-m-left_medium slds-m-top_small"> 
+                <p>Please select an answer for all the questions</p>
+            </div>
+        </aura:if>
+    </lightning:card>
+    
+</aura:component>
