@@ -1,0 +1,13 @@
+<aura:component >
+	<aura:attribute name="options" type="List" />
+    <aura:attribute name="value" type="String" default="5"/>
+    <aura:registerEvent name="qpsc" type="c:QuestionsPerScreenChange"/>
+    
+    <lightning:radioGroup name="radioButtonGroup"
+                          label="Questions Per Screen"
+                          options="{! v.options }"
+                          value="{! v.value }"
+                          type="button"
+                          onchange="{!c.handleChange}"
+                          />    
+</aura:component>
