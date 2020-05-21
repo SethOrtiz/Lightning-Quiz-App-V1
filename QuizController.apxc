@@ -1,0 +1,28 @@
+public with sharing class QuizController {
+    @AuraEnabled
+    public static List<Question__c> getQuestions(String quizId) {
+        List<Question__c> ql = [SELECT Id, Body__c, Options__c, Correct_Answer__c 
+                                FROM Question__c 
+                                Where Quiz_Name__c = :quizId];  
+        Quiz__c quiz = [SELECT Formatted__c FROM Quiz__c WHERE Id = :quizId LIMIT 1];
+        
+        
+        List<Question__c> lq = Randomizer.getRandomQuestionList(ql);
+        System.debug('lq: ' + lq);
+        return lq;
+    }  
+}
+	/*
+	 * This Code flips the direction of questions in the list based on whether the Attempt number is even or odd.
+	 
+       // attempt is being return as undefined for some reason so x is a hardcoded place holder I'll be using for now.
+       Integer att = Integer.valueOf(attempt.trim());
+       System.debug('att : ' + att + attempt);
+       if(Math.mod(att, 2) == 0){
+       List<Question__c> lq = new List<Question__c>();
+                for(Integer i = ql.size() - 1; i >= 0; i--){
+                    lq.add(ql[i]);
+                }
+        return lq;
+        }
+	*/
