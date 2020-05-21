@@ -1,0 +1,20 @@
+.THIS .answer-card {
+    font-size: 14px;
+    padding: 5%;
+    color: white;
+    border-radius: 5px;
+}
+
+.THIS .answer-card h2{
+    font-size: 16px;
+    font-style: bold;
+    text-align: center;
+    margin-bottom: 10px
+}
+.THIS .incorrect {
+   background-color : salmon;
+}
+
+.THIS .correct {
+   background-color : #7ecf64; 
+}
