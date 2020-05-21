@@ -1,0 +1,25 @@
+<aura:component >
+    <aura:attribute name="results" type="List" default="[]"/>
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem class="slds-text-heading_large">
+            <lightning:icon iconName="action:following"/>
+            <span class="page-section page-header slds-m-left_small"> Results</span>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <lightning:card>
+        
+        <lightning:layout horizontalAlign="Center">
+            <lightning:layoutItem padding="around-large">
+                <aura:iteration items="{!v.results}" var="item">
+                    <c:AnswerCheck questionId="{!item.Id}" questionLabel="{!item.Body__c}" actualAnswer="{!item.answerSelected}" correctAnswer="{!item.Correct_Answer__c}" correct="{!item.correct}" /> 
+                </aura:iteration>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout horizontalAlign="Center">
+            <lightning:button aura:id="retakeSubmitBtn" variant="Brand" label="Retake" title="Submit" onclick="{!c.handleRetake}" />
+        </lightning:layout>
+        
+    </lightning:card>
+</aura:component>
