@@ -1,0 +1,16 @@
+public class Randomizer { 
+    public static List<Question__c> getRandomQuestionList(List<Question__c> questionList){
+        Question__c qst;
+        integer randomIndex;
+        integer currentIndex = questionList.size();
+        
+        while (currentIndex != 0) {
+            randomIndex = integer.valueOf(Math.floor(Math.random() * currentIndex));
+            currentIndex -= 1;
+            qst = questionList[currentIndex];
+            questionList[currentIndex] = questionList[randomIndex];
+            questionList[randomIndex] = qst;
+        }
+        return questionList;
+    }
+}
